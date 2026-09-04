@@ -5,6 +5,23 @@ import cargar_datos as cd
 precios_reales = cd.obtener_precios()
 
 
+# B1. Cifras significativas = mantisa corta.
+
+""" 
+Explica por qué tomar un precio con 2 cifras significativas equivale a guardarlo con una mantisa de
+pocos bits. Con 1000.76, muestra el error de representación al dejar 3 cifras
+
+"""
+
+numero_bits = 1000.76
+numero_normal = 1000.0
+
+#con esto saco el error de manera positiva entre los numeros
+numero_bueno = np.abs(numero_bits - numero_normal)
+print("representacion al dejar 3 cifras: ", numero_bueno)
+
+
+
 # B4. Cancelación en la máquina
 
 #aqui usamos la calculadora de python, de 32 bits para tener error
