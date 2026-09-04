@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from cargar_datos import obtener_precios
+import cargar_datos as cd
 
-precios_reales = obtener_precios()
+precios_reales = cd.obtener_precios()
 
 
 # B4. Cancelación en la máquina

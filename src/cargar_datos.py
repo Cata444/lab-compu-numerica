@@ -14,7 +14,12 @@ def obtener_precios():
     
     return vector_precios
 
-# Pequeña prueba para ver si funciona cuando ejecutas solo este archivo
+def obtener_datos():
+    
+    datos_csv = np.genfromtxt('data/dolar_observado_sii_2022_2025.csv', delimiter=',', skip_header=1)
+    
+    for dato in datos_csv:
+        print(dato)
 if __name__ == "__main__":
     precios = obtener_precios()
     print("Datos cargados correctamente. Cantidad de meses:", len(precios))
