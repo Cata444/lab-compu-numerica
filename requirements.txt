@@ -4,7 +4,15 @@ Para ejecutar el trabajo de este laboratorio se requiere un entorno de Python y 
 
 Las dependencias externas necesarias para hacer que el proyecto funcione son las siguientes:
 
-| Librería | Uso en el proyecto | Funciones principales utilizadas |
-| :--- | :--- | :--- |
-| **NumPy** | mantisa corta, manejo de tipos de datos con restriccion y vectorización de lectura del CSV. | `np.genfromtxt`, `np.round`, `np.trunc`, `np.abs`, `np.where`, `np.savetxt`, `np.float32`, `np.float64` |
-| **Matplotlib** | Generación de gráficos en general | `plt.subplots`, `plt.bar`, `plt.plot`, `plt.savefig`, `plt.close()`, `plt.show()`, `plt.grid` |
+### NumPy
+* **Uso en el proyecto:** Simulación de mantisa corta, manejo de tipos de datos restrictivos y vectorización de lectura del CSV.
+* **Funciones principales utilizadas:** `np.genfromtxt`, `np.round`, `np.trunc`, `np.abs`, `np.where`, `np.savetxt`, `np.float32`, `np.float64`.
+
+### Matplotlib
+* **Uso en el proyecto:** Generación de gráficos de barras y de líneas para evidenciar la deriva del punto flotante y las variaciones.
+* **Funciones principales utilizadas:** `plt.subplots`, `plt.bar`, `plt.plot`, `plt.savefig`, `plt.close()`, `plt.show()`, `plt.grid`.
+
+## Instrucciones de Instalación
+Para instalar todas las dependencias necesarias, abre tu terminal en la carpeta del proyecto y ejecuta:
+
+`pip install numpy matplotlib`
