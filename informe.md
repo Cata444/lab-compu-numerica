@@ -55,7 +55,6 @@ por lo que aseguramos una ganancia de $250.000 con esta jugada.
 **Los tramos donde NO se puede recomendar: nombra al menos un par de meses (o un año) donde la variación es tan chica frente al error que cualquier afirmación sobre subir o bajar sería irresponsable.**
 **R:** por ejemplo no se recomienda en diciembre 2022 $875.66 y diciembre de 2023 $874.67
 
-R: No se puede recomendar operar en el tramo comprendido entre Diciembre de 2022 ($875.66) y Diciembre de 2023 ($874.67). En este lapso, la variación real del precio del dólar fue de apenas un peso. Al hacer los cálculos con cifras significativas recortadas (cancelación catastrófica), el error acumulado por la resta llega a ser del 67% respecto a la variación misma. El movimiento del mercado fue tan estático que cualquier fluctuación en los resultados se debe estrictamente a la "basura decimal" y los errores de redondeo del computador, haciendo irresponsable afirmar si hubo un alza o una baja.
 
 **La lección de método: en una frase, ¿qué aprendiste sobre confiar en una “diferencia” cuando viene de restar dos números grandes y parecidos?**
 **R:** Restar dos números grandes y que son prácticamente casi iguales es muy peligroso en términos de computación, porque los datos reales de las finanzas se anulan entre sí y el resultado final queda totalmente dominado por los errores de redondeo que traía el computador.
