@@ -50,7 +50,7 @@ def variacion_anual():
     #Obtenemos los datos del CSV usando la funcion de obtener_datos de el archivo cargar_datos.py
     datos_csv = cd.obtener_datos()
 
-    # Obtenemos el numero redondeado, error absoluto, error relativo y el numero real
+    # Obtenemos el numero redondeado, error absoluto, error relativo y el numero real.
     num_red_real_err_abs_rel = er.sacar_numero_redondeado_error_absoluto_relativo(datos_csv)
     errores_absolutos = num_red_real_err_abs_rel[0]
     precios_redondeados = num_red_real_err_abs_rel[2]
