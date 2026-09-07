@@ -52,9 +52,8 @@ el error relativo de la compra fue 0.21%  y la venta fue 0.07%, dando como resul
 
 por lo que aseguramos una ganancia de $250.000 con esta jugada.
 
-**Los tramos donde NO se puede recomendar: nombra al menos un par de meses (o un año) donde la variación es tan chica frente al error que cualquier afirmación sobre subir o bajar sería irresponsable.**
-**R:** por ejemplo no se recomienda en diciembre 2022 $875.66 y diciembre de 2023 $874.67
+*   **Los tramos donde NO se puede recomendar: nombra al menos un par de meses (o un año) donde la variación es tan chica frente al error que cualquier afirmación sobre subir o bajar sería irresponsable.**
+**R:** por ejemplo no se recomienda en diciembre 2022 $875.66 y diciembre de 2023 $874.67, al tener una variacion real del precio tan minima como lo es 1 peso tenemos falta de precisión, como los valores son tan parecidos se anulan entre sí, entonces no sabremos exactamente si es que el dolar subió o bajó y no podemos regirnos solamente por incertidumbre.
 
-
-**La lección de método: en una frase, ¿qué aprendiste sobre confiar en una “diferencia” cuando viene de restar dos números grandes y parecidos?**
+*   **La lección de método: en una frase, ¿qué aprendiste sobre confiar en una “diferencia” cuando viene de restar dos números grandes y parecidos?**
 **R:** Restar dos números grandes y que son prácticamente casi iguales es muy peligroso en términos de computación, porque los datos reales de las finanzas se anulan entre sí y el resultado final queda totalmente dominado por los errores de redondeo que traía el computador.
