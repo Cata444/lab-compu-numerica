@@ -24,17 +24,22 @@ def cancelacion():
     print(f"ΔP {delta_p} ± {error_propagados}, su error porcentual es {(error_propagados / delta_p) * 100}%")
 
     er.registrar_evaluacion_error(
-        par_puntos="Variacion noviembre 2022 y mayo 2024",
-        anio="2022-2024",
-        error_absoluto=f"{error_abs_nov:.2f} y {error_abs_may:.2f}",
-        error_relativo="N/A",
-        error_propagado= error_propagados
+        ej_descripcion= "A3 Cancelacion",
+        punto1= "Nov-2022",
+        punto2= "May-2024",
+        valor_real= f"Nov-2022: {num_red_real_err_abs_rel[3][10]} - May_2024: {num_red_real_err_abs_rel[3][28]}",
+        valor_aprox= f"Nov-2022: {dolar_nov_22} - May_2024: {dolar_may_24}",
+        error_absoluto= f"Nov-2022: {error_abs_nov} - May_2024: {error_abs_may}",
+        error_relativo= f"{(error_propagados / delta_p) * 100}",
+        error_propagado= f"{error_propagados}",
+        ruta_archivo= "./data/evaluacion_errores.csv"
     )
     # Zona de Grafico de Barras
-    meses_x = ["+", "ΔP", "-"]
-    valores_y = [np.float64(delta_p + error_propagados), np.float64(delta_p), np.float64(delta_p - error_propagados)]
+    meses_x = ["ΔP"]
+    valores_y = [np.float64(delta_p)]
+    error = [error_propagados]
     fig, ax = plt.subplots(figsize=(12, 6))
-    ax.bar(meses_x, valores_y, color='skyblue', edgecolor='black')
+    ax.bar(meses_x, valores_y, yerr = error,color='skyblue', edgecolor='black')
 
     ax.set_xlabel('Variación del ΔP')
     ax.set_ylabel('Error')
@@ -63,6 +68,17 @@ def variacion_anual():
         resultado_resta, error_propagado, error_relativo_total = er.propagacion_resta(precio_enero, precio_diciembre, errores_absolutos[i], errores_absolutos[i+11])
         errores_propagado.append(error_propagado)
         errores_relativos_totales.append(error_relativo_total)
+        er.registrar_evaluacion_error(
+                ej_descripcion= "A4 Variacion Anual",
+                punto1= f"Enero-{datos_csv[i][0]}",
+                punto2= f"Diciembre-{datos_csv[i+11][0]}",
+                valor_real= f"Nov-2022: {num_red_real_err_abs_rel[3][i]} - May_2024: {num_red_real_err_abs_rel[3][i+11]}",
+                valor_aprox= f"Enero-{datos_csv[i][0]}: {precio_enero} - Diciembre-{datos_csv[i+11][0]}: {precio_diciembre}",
+                error_absoluto= f"N/A",
+                error_relativo= f"{error_relativo_total}",
+                error_propagado= f"{error_propagado}",
+                ruta_archivo= "./data/evaluacion_errores.csv"
+            )
     #Buscaremos el maximo error porcentual
     max_er_relativo = max(errores_relativos_totales)
     #Buscaremos el indice del valor maximo, para obtener el año y el mes del error porcentual
@@ -74,5 +90,4 @@ if __name__ == "__main__":
 #Zona de uso de las funciones, solo desmarcar la que se requiera usar.
     #cancelacion()
     #variacion_anual
-    #er.exportar_csv_evaluacion("./data/evaluacion_errores.csv")
     pass

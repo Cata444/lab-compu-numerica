@@ -1,29 +1,24 @@
 import numpy as np
 import cargar_datos as cd
 import matplotlib.pyplot as plt
-
+import anualidad as an
+import os
 ######################## Funciones de error y operaciones #################################################
-# Lista temporal para acumular las filas antes de convertirlas a un arreglo de numpy
-registro_errores_laboratorio = []
-
-def registrar_evaluacion_error(par_puntos, anio, error_absoluto, error_relativo, error_propagado):
-    """
-    Agrega una fila de datos a nuestro registro temporal.
-    """
-    fila = [par_puntos, str(anio), str(error_absoluto), str(error_relativo), str(error_propagado)]
-    registro_errores_laboratorio.append(fila)
-
-def exportar_csv_evaluacion(nombre_archivo="evaluacion_errores.csv"):
-    """
-    Convierte el registro en un arreglo de numpy y lo exporta a CSV.
-    """
-    matriz_datos = np.array(registro_errores_laboratorio, dtype=str)
+def registrar_evaluacion_error(ej_descripcion, punto1, punto2, valor_real, valor_aprox, error_absoluto, error_relativo, error_propagado="N/A", ruta_archivo="evaluacion_errores.csv"):
+    '''
+        Función para Guardar los datos recopilados en un archivo csv, guardandandolos de manera progresiva mientras avanza el programa. (Se recomienda eliminar el archivo csv antes de volver a ejecutar este codigo.) 
+    '''
+    fila = np.array([[
+        str(ej_descripcion), str(punto1), str(punto2), str(valor_real), str(valor_aprox), str(error_absoluto), str(error_relativo),str(error_propagado)]], dtype=str)
     
-    encabezados = "Par_Puntos_Evaluado,Anio,Error_Absoluto,Error_Relativo_Porcentual,Error_Propagado_Final"
+    archivo_existe = os.path.isfile(ruta_archivo)
     
-    np.savetxt(nombre_archivo, matriz_datos, delimiter=',', header=encabezados, fmt='%s', comments='')
-    
-    print(f"\nArchivo {nombre_archivo} generado exitosamente usando numpy.")
+    with open(ruta_archivo, mode='a', encoding='utf-8') as archivo:
+        if not archivo_existe:
+            # Si el archivo es nuevo, escribimos los encabezados que pide el laboratorio
+            archivo.write("Ejercicio_descripcion,Punto1,Punto2,Valor_Real,Valor_Aproximado,Error_Absoluto,Error_relatico,Error_Propagado\n")
+        
+        np.savetxt(archivo, fila, delimiter=',', fmt='%s')
 
 def numero_cientifico(x, c_s = None, truncar = False, truncar_cifras = 2):
     '''
@@ -152,8 +147,19 @@ def representation_error():
     # Buscamos el error relativo máximo y su índice para poder imprimir el mes y año correspondiente.
     max_er_relativo = max(num_red_err_abs_rel[1])
     ind_max_er_relativo = num_red_err_abs_rel[1].index(max_er_relativo)
-    print("El error relativo máximo se encuentra en el mes", datos_csv[ind_max_er_relativo][1],"del año", datos_csv[ind_max_er_relativo][0], "con un valor de: ", numero_cientifico(max_er_relativo, 0, True, 2)[0][0], "%")
-    
+    print("El error relativo máximo se encuentra en el mes", datos_csv[ind_max_er_relativo][1],"del año", datos_csv[ind_max_er_relativo][0], "con un valor de: ", numero_cientifico(max_er_relativo[0], 0, True, 2)[0][0], "%")
+    for datos in range(len(num_red_err_abs_rel[3])):
+        registrar_evaluacion_error(
+                ej_descripcion= "A1 representacion de error en los datos",
+                punto1= f"{datos_csv[datos][0]} - {datos_csv[datos][1]}",
+                punto2= f"N/A",
+                valor_real= f"{num_red_err_abs_rel[3][datos]}",
+                valor_aprox= f"{num_red_err_abs_rel[2][datos]}",
+                error_absoluto= f"{num_red_err_abs_rel[0][datos]}",
+                error_relativo= f"{num_red_err_abs_rel[1][datos]}",
+                ruta_archivo= "./data/evaluacion_errores.csv"
+            )
+
     # Zona de Grafico de Barras
     meses_x = range(len(num_red_err_abs_rel[1]))
     valores_y = np.array(num_red_err_abs_rel[1], dtype=float).flatten()
@@ -224,7 +230,7 @@ def evaluacion_compra_venta(monto_inicial, indice_compra, indice_venta, propio=0
 
     #Pasar a error absoluto para arrastrar a la ganancia
     error_absoluto_final = (error_relativo_total * monto_final) / 100
-    
+    error_porcentual_ganancia = 0
     #Calculo del error porcentual de la ganancia se ocupa valor absoluto de la ganancia para que no de negativo, y se multiplica por 100 para pasarlo a porcentaje
     if ganancia_obtenida != 0:
         error_porcentual_ganancia = (error_absoluto_final / np.abs(ganancia_obtenida)) * 100
@@ -234,6 +240,17 @@ def evaluacion_compra_venta(monto_inicial, indice_compra, indice_venta, propio=0
         error_porcentual_ganancia = float('inf') # Si la ganancia es 0, el error es infinito
         print(f"Ganancia obtenida: {numero_cientifico(ganancia_obtenida, 0, True, 2)[0][0]} ± {numero_cientifico(error_absoluto_final[0], 0, True, 2)[0][0]} pesos")
         print(f"Error porcentual de la ganancia: {error_porcentual_ganancia}%")
+
+    registrar_evaluacion_error(
+                    ej_descripcion= "A2 Evaluacion compra-venta",
+                    punto1= f"{datos_csv[indice_compra][1]}-{datos_csv[indice_compra][0]}:{num_red_err_abs_rel[2][indice_compra]}",
+                    punto2= f"{datos_csv[indice_venta][1]}-{datos_csv[indice_venta][0]}:{num_red_err_abs_rel[2][indice_venta]}",
+                    valor_real= f"{ganancia_obtenida}",
+                    valor_aprox= f"N/A",
+                    error_absoluto= f"{error_absoluto_final[0]}",
+                    error_relativo= f"{error_porcentual_ganancia}",
+                    ruta_archivo= "./data/evaluacion_errores.csv"
+                )
     
     return [monto_final, ganancia_obtenida, rentabilidad_obtenida, error_absoluto_final, error_porcentual_ganancia]
 
@@ -255,7 +272,7 @@ def mejor_compra_venta(monto_inicial = 1000000):
     print("El mejor precio de venta se encuentra en el mes", datos_csv[ind_mejor_venta][1],"del año", datos_csv[ind_mejor_venta][0], "con un valor de: ", mejor_venta)
 
     # Calculamos el resultado de comprar 1,000,000 de pesos chilenos en el mejor mes de compra y venderlos en el mejor mes de venta, junto con su error relativo total.
-    resultado = evaluacion_compra_venta(monto_inicial, ind_mejor_compra, ind_mejor_venta)
+    resultado = evaluacion_compra_venta(monto_inicial, ind_mejor_compra, ind_mejor_venta, propio=1)
 
     #Para el apartado grafico realizaremos un escaneo de la rentabilidad en cada mes y lo llevaremos a un grafico de barras con su error para ver como se ven los errores
     rentables = []
@@ -290,15 +307,14 @@ def mejor_compra_venta(monto_inicial = 1000000):
 
 if __name__ == "__main__":
 #Zona de uso de las funciones, solo desmarcar la que se requiera usar.
-    #representation_error()
-    #evaluacion_compra_venta(1000000, 13, 36)
-    #cancelacion()
-    #variacion_anual()
-    #mejor_compra_venta()
+    representation_error()
+    evaluacion_compra_venta(1000000, 13, 36)
+    an.cancelacion()
+    an.variacion_anual()
+    mejor_compra_venta()
 
 ###########Usar grafico serie mensual#################
-    datos_csv = cd.obtener_datos()
-    num_red_real_err_abs_rel = sacar_numero_redondeado_error_absoluto_relativo(datos_csv)
-    precios = num_red_real_err_abs_rel[3]
-    grafico_serie_mensual_dolar(precios)
-    pass
+    #datos_csv = cd.obtener_datos()
+    #num_red_real_err_abs_rel = sacar_numero_redondeado_error_absoluto_relativo(datos_csv)
+    #precios = num_red_real_err_abs_rel[3]
+    #grafico_serie_mensual_dolar(precios)
