@@ -280,7 +280,7 @@ def mejor_compra_venta(monto_inicial = 1000000):
     for venta in range(ind_mejor_compra, len(nums_reales)-1):
         evaluado = evaluacion_compra_venta(monto_inicial, ind_mejor_compra, venta+1, propio=1)
         
-        rentabilidad_mes = evaluado[2]
+        rentabilidad_mes = evaluado[2] - 100
         error_absoluto_pesos = evaluado[3]
         
         error_en_porcentaje = (error_absoluto_pesos / monto_inicial) * 100
@@ -314,7 +314,7 @@ if __name__ == "__main__":
     mejor_compra_venta()
 
 ###########Usar grafico serie mensual#################
-    #datos_csv = cd.obtener_datos()
-    #num_red_real_err_abs_rel = sacar_numero_redondeado_error_absoluto_relativo(datos_csv)
-    #precios = num_red_real_err_abs_rel[3]
-    #grafico_serie_mensual_dolar(precios)
+    datos_csv = cd.obtener_datos()
+    num_red_real_err_abs_rel = sacar_numero_redondeado_error_absoluto_relativo(datos_csv)
+    precios = num_red_real_err_abs_rel[3]
+    grafico_serie_mensual_dolar(precios)

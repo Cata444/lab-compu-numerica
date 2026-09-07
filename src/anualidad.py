@@ -34,15 +34,29 @@ def cancelacion():
         error_propagado= f"{error_propagados}",
         ruta_archivo= "./data/evaluacion_errores.csv"
     )
+    errores_propagados = []
+    delta = []
+    lista_rev = num_red_real_err_abs_rel[3][:-1]
+    lista = num_red_real_err_abs_rel[3][1:]
+    for i in range(len(lista_rev)):
+        punto1 = lista_rev[i]
+        punto2 = lista[i]
+        deltas = er.variacion_entre_meses(np.round(punto1), np.round(punto2))
+        delta.append(deltas)
+        error_abs_p1 = er.error_absoluto(punto1, np.round(punto1))
+        error_abs_p2 = er.error_absoluto(punto2 , np.round(punto2))
+        errors_propagados = np.round((np.round(error_abs_p1, 3) + np.round(error_abs_p2, 3)), 3)
+        errores_propagados.append(errors_propagados)
+
     # Zona de Grafico de Barras
-    meses_x = ["ΔP"]
-    valores_y = [np.float64(delta_p)]
-    error = [error_propagados]
+    meses_x = range(len(num_red_real_err_abs_rel[3]) - 1)
+    valores_y = delta
+    error = errores_propagados
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.bar(meses_x, valores_y, yerr = error,color='skyblue', edgecolor='black')
 
     ax.set_xlabel('Variación del ΔP')
-    ax.set_ylabel('Error')
+    ax.set_ylabel('')
     ax.set_title('Variación mes a mes ΔP')
     ax.grid(axis='y', linestyle='--', alpha=0.7)
 
@@ -88,6 +102,6 @@ def variacion_anual():
 
 if __name__ == "__main__":
 #Zona de uso de las funciones, solo desmarcar la que se requiera usar.
-    #cancelacion()
+    cancelacion()
     #variacion_anual
     pass
