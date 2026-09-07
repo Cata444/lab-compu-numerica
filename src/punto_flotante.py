@@ -51,7 +51,7 @@ dinero_inicial = 1000000
 platita_perdida = [] 
 
 # se recorre la lista completa con un for porque son 48 elementos
-for precio_actual in precios_reales:
+for precio_actual in precios_reales:#dfg
     
     # hay que ponerlo con 32 bits porque es el q tiene mas error 
     precio_malo = np.float32(precio_actual)
