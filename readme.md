@@ -25,17 +25,16 @@ nosotros elegimos los meses: Noviembre 2022 (917.05) y Mayo 2024 (917.88) para p
 
 **A4. Anualidad (variación enero a diciembre)**
 Calculamos los errores porcentuales de enero y diciembre de cada año respectivamente y nos arrojaron estos resultados:
-1.  **2022:** enero (822.05) -> 820 diciembre (875.66) -> 880, variacion : 880 - 820 = 60 pesos, error propagado : enero (2.04) diciembre (4.34), error porcentual: (6.39 / 60) * 100 = 10.65%
-2.  **2023** : enero (826.34) -> 830 diciembre (874.67) -> 870, variacion : 870 - 830 = 40.00 pesos, error propagado : enero (3.66) diciembre (4.67), error porcentual: (8.33 / 40) * 100 = 20.82%
-3.  **2024**: enero (907.99) -> 910 diciembre (982.30) -> 980, variacion : 980 - 910 = 70.00 pesos, error propagado : enero (2.01) diciembre (2.30), error porcentual: (4.31 / 70) * 100 = 6.16%
-4.  **2025**: enero (1000.76) -> 1000 diciembre (916.16) -> 920, variacion : 920 - 1000 = -80.00 pesos, error propagado : enero (0.76) diciembre (3.84), error porcentual: (4.60 / 80) * 100 = 5.75%
+1.  **2022:** enero (822.05) -> 820 diciembre (875.66) -> 880, variacion : 880 - 820 = 60 pesos, error propagado : enero (2.04) diciembre (4.34), error porcentual: (6.38 / 60) * 100 = 10.63%
+2.  **2023** : enero (826.34) -> 830 diciembre (874.67) -> 870, variacion : 870 - 830 = 40.00 pesos, error propagado : enero (3.65) diciembre (4.66), error porcentual: (8.31 / 40) * 100 = 20.77%
+3.  **2024**: enero (907.99) -> 910 diciembre (982.30) -> 980, variacion : 980 - 910 = 70.00 pesos, error propagado : enero (2.0) diciembre (2.29), error porcentual: (4.29 / 70) * 100 = 6.12%
+4.  **2025**: enero (1000.76) -> 1000 diciembre (916.16) -> 920, variacion : 920 - 1000 = -80.00 pesos, error propagado : enero (0.75) diciembre (3.84), error porcentual: (4.59 / 80) * 100 = 5.73%
 *   **¿Qué tienen en común los años poco confiables?:** que algo que no se pensaba es que cuando tenemos errores pequeños osea una variación pequeña el "pequeño error" matematico toma un protagonismo grande cuando estamos ya en el toque final que es el porcentaje final.
 
 **A5. Mejor compra y mejor venta**
 *   **Mejor compra:** Febrero 2023 ($798.26).
 *   **Mejor Venta:** Enero 2025 ($1000.76).
-*   **¿La conclusión sobrevive al error?:** la rentabilidad de $250.000 es mucho mas que el error de $3.675, asi que es super buen plan
-
+*   **¿La conclusión sobrevive al error?:** la rentabilidad de $250.000 es mucho mas que el error de $3.500, asi que es super buen plan
 
 ---
 
